@@ -14,7 +14,6 @@ export class Article {
   @Column({ name: '昵称', unique: true })
   nickname: string;
 
-  // 中文字符长度占2位，英文字符占1位
   @Column({ name: '性别', length: 1 })
   sex: string;
 
