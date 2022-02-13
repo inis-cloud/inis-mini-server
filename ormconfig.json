@@ -1,0 +1,12 @@
+{
+  "type": "mysql",
+  "host": "182.92.220.149",
+  "port": 3306,
+  "username": "test_123mtr_top",
+  "password": "G8CphskeyRHY8HJa",
+  "database": "test_123mtr_top",
+  "entities": [
+    "dist/**/*.entity{.ts,.js}"
+  ],
+  "synchronize": true
+}
