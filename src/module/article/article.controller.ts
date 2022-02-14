@@ -6,12 +6,16 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
+  ForbiddenException,
+  UseFilters,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 
-@Controller('article')
+@Controller('api/article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
