@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { inisArticle } from 'src/entities/InisArticle.entity';
 import { Repository } from 'typeorm';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import { CreateArticleDto, FindeAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
 @Injectable()
 export class ArticleService {
@@ -12,23 +11,23 @@ export class ArticleService {
     private inisArticleRepository: Repository<inisArticle>,
   ) {}
 
-  async create(createArticleDto: CreateArticleDto) {
-    return await this.inisArticleRepository.save(createArticleDto);
+  async create(body: CreateArticleDto) {
+    return await this.inisArticleRepository.save(body);
   }
 
-  async findAll() {
-    return await this.inisArticleRepository.find();
+  async findAll(body: FindeAllArticleDto) {
+    return await this.inisArticleRepository.find(body);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} article`;
+  async findOne(body: FindOneArticleDto) {
+    return await this.inisArticleRepository.findOne(body);
   }
 
-  update(id: number, updateArticleDto: UpdateArticleDto) {
-    return this.inisArticleRepository.update(id, updateArticleDto);
+  async update(id: number, body: UpdateArticleDto) {
+    return this.inisArticleRepository.update(id, body);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} article`;
+  async remove(param: RemoveArticleDto) {
+    return this.inisArticleRepository.remove(param);
   }
 }

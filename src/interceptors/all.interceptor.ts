@@ -17,6 +17,12 @@ export class AllInterceptor<T> implements NestInterceptor<T, Response<T>> {
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
-    return next.handle().pipe(map((data) => ({ data })));
+    return next.handle().pipe(
+      map((data) => ({
+        code: 200,
+        data,
+        msg: 'ok',
+      })),
+    );
   }
 }

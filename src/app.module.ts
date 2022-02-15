@@ -3,8 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './modules/article/article.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { AllInterceptor } from './interceptors/all.interceptor';
 
 @Module({
   imports: [
@@ -21,12 +19,6 @@ import { AllInterceptor } from './interceptors/all.interceptor';
     ArticleModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: AllInterceptor,
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}
