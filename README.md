@@ -20,36 +20,27 @@
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
 
-## Installation
+## 安装依赖
 
 ```bash
-$ npm install
+$ yarn 或 yarn install
+$ npm i 或 npm install
 ```
 
-## Running the app
+## 运行
 
 ```bash
 # development
+$ yarn start
 $ npm run start
 
 # watch mode
+$ yarn start:dev
 $ npm run start:dev
 
 # production mode
+$ yarn start:prod
 $ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## Support
