@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    ArticleModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '182.92.220.149',
@@ -16,7 +17,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       autoLoadEntities: true,
     }),
-    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

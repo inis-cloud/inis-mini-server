@@ -1,11 +1,7 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ArticleService } from './article.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { FindeAllArticleDto } from './dto/findAll-article.dto';
-import { FindOneArticleDto } from './dto/findOne-article.dto';
-import { RemoveArticleDto } from './dto/remove-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
 @Controller('api/article')
 @ApiTags('文章模块')
@@ -13,12 +9,12 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   @Post()
-  create(@Body() body: CreateArticleDto) {
-    return this.articleService.create(body);
+  create(@Body() createArticleDto: CreateArticleDto) {
+    return this.articleService.create(createArticleDto);
   }
 
   @Get('/findAll')
-  find(@Param() param: FindeAllArticleDto) {
+  find(@Query() param: FindAllArticleDto) {
     return this.articleService.findAll(param);
   }
 
@@ -32,7 +28,7 @@ export class ArticleController {
     return this.articleService.update(+id, body);
   }
 
-  @Delete(':id')
+  @Delete()
   remove(@Param() param: RemoveArticleDto) {
     return this.articleService.remove(param);
   }
