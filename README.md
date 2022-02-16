@@ -5,7 +5,7 @@
 [circleci-image]: https://avatars.githubusercontent.com/u/76507449?s=200&v=4
 [circleci-url]: https://inis.cc
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a>的渐进式框架开发的 Blog REST_API</p>
+  <p align="center">一个异步非阻塞 IO <a href="http://nodejs.org" target="_blank">Node.js</a>版 Blog REST_API</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -19,10 +19,6 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
-
-## 描述
-
-[Nest](https://github.com/nestjs/nest) 异步非阻塞 IO Node.js 版 spring 风格构建的 REST_API
 
 ## Installation
 
