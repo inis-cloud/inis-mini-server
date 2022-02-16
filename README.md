@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://inis.cc" target="blank"><img src="https://avatars.githubusercontent.com/u/76507449?s=200&v=4" width="320" alt="Inis Logo" /></a>
 </p>
 
 [circleci-image]: https://avatars.githubusercontent.com/u/76507449?s=200&v=4
