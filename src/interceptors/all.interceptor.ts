@@ -1,17 +1,17 @@
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-export interface Response<T> {
-  data: T;
-}
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler, RequestTimeoutException } from '@nestjs/common';
+import { catchError, map, Observable, throwError, TimeoutError } from 'rxjs';
 
 @Injectable()
-export class AllInterceptor<T> implements NestInterceptor<T, Response<T>> {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
+export class AllInterceptor implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const ctx = context.switchToHttp();
+    const response = ctx.getResponse();
     return next.handle().pipe(
+      catchError((err) => {
+        return throwError(() => new RequestTimeoutException(err));
+      }),
       map((data) => ({
-        code: 200,
+        code: response.statusCode,
         data,
         message: '成功',
       })),

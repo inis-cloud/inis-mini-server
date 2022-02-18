@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Put, Query, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Put, Query, UseFilters } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ArticleService } from './article.service';
 import { CreateArticleDto, FindArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
@@ -18,13 +18,13 @@ export class ArticleController {
     return this.articleService.create(body);
   }
 
-  @Put('update/:id')
-  update(@Param('id') id: number, @Body() body: UpdateArticleDto) {
+  @Put('update')
+  update(@Query('id') id: number, @Body() body: UpdateArticleDto) {
     return this.articleService.update(id, body);
   }
 
-  @Delete('remove/:id')
-  remove(@Param('id') id: RemoveArticleDto) {
+  @Delete('remove')
+  remove(@Query('id') id: RemoveArticleDto) {
     return this.articleService.remove(id);
   }
 }
