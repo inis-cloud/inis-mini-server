@@ -1,5 +1,5 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler, RequestTimeoutException } from '@nestjs/common';
-import { catchError, map, Observable, throwError, TimeoutError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class AllInterceptor implements NestInterceptor {
