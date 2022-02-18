@@ -10,7 +10,7 @@ async function bootstrap() {
 
   const options = new DocumentBuilder().setTitle('INIS').setDescription('基于Node的REST_API服务').setVersion('1.0').build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('inis_api', app, document);
 
   app.useGlobalPipes(
     new ValidationPipe({

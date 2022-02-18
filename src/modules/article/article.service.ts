@@ -1,35 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { inisArticle } from 'src/entities/InisArticle.entity';
+import { artcleEntity } from './artcle.entity';
 import { Repository } from 'typeorm';
-import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
+import { CreateArticleDto, FindArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
 @Injectable()
 export class ArticleService {
   constructor(
-    @InjectRepository(inisArticle)
-    private inisArticleRepository: Repository<inisArticle>,
+    @InjectRepository(artcleEntity)
+    private artcleEntityRepository: Repository<artcleEntity>,
   ) {}
 
+  async find({ pageNum, pageSize, title, description, content }: FindArticleDto) {
+    const count = await this.artcleEntityRepository.findAndCount();
+    const pagingData = { pageNum: +pageNum || 1, pageSize: +pageSize || 10, total: count[1] };
+    const data = await this.artcleEntityRepository.find({
+      take: pagingData.pageSize,
+      where: [{ title }, { description }, { content }],
+    });
+    return { ...pagingData, list: data };
+  }
+
   async create(body: CreateArticleDto) {
-    return await this.inisArticleRepository.save(body);
-  }
-
-  async findAll(body: FindAllArticleDto) {
-    // const data = await this.inisArticleRepository.find();
-    // console.log(data);
-    return await this.inisArticleRepository.find({ take: body.limit ?? 5 });
-  }
-
-  async findOne(body: FindOneArticleDto) {
-    return await this.inisArticleRepository.findOne(body);
+    const { classify, ...data } = await this.artcleEntityRepository.save(body);
+    return { classify: classify.split(','), ...data };
   }
 
   async update(id: number, body: UpdateArticleDto) {
-    return this.inisArticleRepository.update(id, body);
+    return this.artcleEntityRepository.update(id, body);
   }
 
-  async remove(param: RemoveArticleDto) {
-    // return this.inisArticleRepository.remove(param);
+  async remove(id: RemoveArticleDto) {
+    const data = await this.artcleEntityRepository.findOne(id);
+    return this.artcleEntityRepository.remove(data);
   }
 }
