@@ -7,9 +7,7 @@ export class AllInterceptor implements NestInterceptor {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse();
     return next.handle().pipe(
-      catchError((err) => {
-        return throwError(() => new RequestTimeoutException(err));
-      }),
+      catchError((err) => throwError(() => new RequestTimeoutException(err))),
       map((data) => ({
         code: response.statusCode,
         data,
