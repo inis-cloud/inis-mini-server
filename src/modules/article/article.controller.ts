@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Delete, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AllVerifyVerifyPipe } from './artcle-verify.pipe';
+import { ArticlePipe } from './article.pipe';
 import { ArticleService } from './article.service';
 import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
@@ -15,7 +15,7 @@ export class ArticleController {
   }
 
   @Get('findOne')
-  findOne(@Query() query: FindOneArticleDto) {
+  findOne(@Query(ArticlePipe) query: FindOneArticleDto) {
     return this.articleService.findOne(query);
   }
 
@@ -25,12 +25,12 @@ export class ArticleController {
   }
 
   @Put('update')
-  update(@Query('id') id: number, @Body() body: UpdateArticleDto) {
+  update(@Query('id', ArticlePipe) id: number, @Body() body: UpdateArticleDto) {
     return this.articleService.update(id, body);
   }
 
   @Delete('remove')
-  remove(@Query('id') id: RemoveArticleDto) {
-    return this.articleService.remove(id);
+  remove(@Query(ArticlePipe) query: RemoveArticleDto) {
+    return this.articleService.remove(query);
   }
 }

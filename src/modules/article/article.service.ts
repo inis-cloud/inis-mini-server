@@ -20,10 +20,10 @@ export class ArticleService {
     return { ...pagingData, list };
   }
 
-  async findOne({ id }: FindOneArticleDto) {
-    const data = await this.ArtcleEntityRepository.findOne(id);
+  async findOne(query: FindOneArticleDto) {
+    const data = await this.ArtcleEntityRepository.findOne(query);
     // 查看文章时更新浏览次数
-    id && this.update(id, { ...data, viewCount: ++data.viewCount });
+    query.id && this.update(query.id, { ...data, viewCount: ++data.viewCount });
     return data || {};
   }
 
@@ -35,8 +35,8 @@ export class ArticleService {
     return this.ArtcleEntityRepository.update(id, body);
   }
 
-  async remove(id: RemoveArticleDto) {
-    const data = await this.ArtcleEntityRepository.findOne(id);
+  async remove(query: RemoveArticleDto) {
+    const data = await this.ArtcleEntityRepository.findOne(query);
     return this.ArtcleEntityRepository.remove(data);
   }
 }

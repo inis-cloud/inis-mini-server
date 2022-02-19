@@ -5,7 +5,6 @@ import { AppModule } from './app.module';
 import { AllExceptionFilter } from './common/filters/all.filter';
 import { AllInterceptor } from './common/interceptors/all.interceptor';
 import { ServiceInterceptor } from './common/interceptors/service.interceptor';
-import { AllPipe } from './common/pipes/all.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -35,7 +34,6 @@ async function bootstrap() {
   );
   app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalInterceptors(new AllInterceptor(), new ServiceInterceptor());
-  app.useGlobalPipes(new AllPipe());
 
   await app.listen(3000);
 }
