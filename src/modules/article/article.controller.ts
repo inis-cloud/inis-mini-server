@@ -1,16 +1,22 @@
-import { Controller, Get, Post, Body, Delete, Put, Query, UseFilters } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { AllVerifyVerifyPipe } from './artcle-verify.pipe';
 import { ArticleService } from './article.service';
-import { CreateArticleDto, FindArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
 @Controller('article')
-@ApiTags('文章模块')
+@ApiTags('文章接口')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
-  @Get('find')
-  find(@Query() query: FindArticleDto) {
-    return this.articleService.find(query);
+  @Get('findAll')
+  findAll(@Query() { pageNum, pageSize }: FindAllArticleDto) {
+    return this.articleService.findAll({ pageNum: pageNum || 1, pageSize: pageSize || 10 });
+  }
+
+  @Get('findOne')
+  findOne(@Query() query: FindOneArticleDto) {
+    return this.articleService.findOne(query);
   }
 
   @Post('create')
