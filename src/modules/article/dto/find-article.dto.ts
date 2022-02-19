@@ -10,6 +10,10 @@ export class FindArticleDto {
   @IsString()
   readonly description: string;
 
+  @ApiProperty({ description: '分类', example: '1,2' })
+  @IsString()
+  readonly classify: string;
+
   @ApiProperty({ description: '内容' })
   @IsString()
   readonly content: string | null;
