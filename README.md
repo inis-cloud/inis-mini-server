@@ -43,6 +43,12 @@ $ yarn start:prod
 $ npm run start:prod
 ```
 
+## API 文档
+
+```bash
+http://127.0.0.1:3000/inis_api
+```
+
 ## License
 
 inis-server is [MIT licensed](LICENSE).
