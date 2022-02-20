@@ -14,7 +14,7 @@ import { jwtConstants } from './common/constants/jwt-constants';
     TypeOrmModule.forFeature([UserEntity]),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '7 days' },
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',

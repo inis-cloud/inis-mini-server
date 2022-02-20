@@ -6,8 +6,6 @@ import { UserEntity } from './entityes/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
-const saltOrRounds = 10;
-
 @Injectable()
 export class AppService {
   constructor(

@@ -12,4 +12,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: jwtConstants.secret,
     });
   }
+
+  // 自执行内部验证
+  async validate(payload: any) {
+    return { userId: payload.id, username: payload.username };
+  }
 }
