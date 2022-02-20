@@ -1,16 +1,22 @@
-import { Controller, Get, Post, Body, Delete, Put, Query, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { ArticlePipe } from './article.pipe';
 import { ArticleService } from './article.service';
-import { CreateArticleDto, FindArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
 @Controller('article')
-@ApiTags('文章模块')
+@ApiTags('文章接口')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
-  @Get('find')
-  find(@Query() query: FindArticleDto) {
-    return this.articleService.find(query);
+  @Get('findAll')
+  findAll(@Query() { pageNum, pageSize }: FindAllArticleDto) {
+    return this.articleService.findAll({ pageNum: pageNum || 1, pageSize: pageSize || 10 });
+  }
+
+  @Get('findOne')
+  findOne(@Query(ArticlePipe) query: FindOneArticleDto) {
+    return this.articleService.findOne(query);
   }
 
   @Post('create')
@@ -18,13 +24,13 @@ export class ArticleController {
     return this.articleService.create(body);
   }
 
-  @Put('update/:id')
-  update(@Param('id') id: number, @Body() body: UpdateArticleDto) {
+  @Put('update')
+  update(@Query('id', ArticlePipe) id: number, @Body() body: UpdateArticleDto) {
     return this.articleService.update(id, body);
   }
 
-  @Delete('remove/:id')
-  remove(@Param('id') id: RemoveArticleDto) {
-    return this.articleService.remove(id);
+  @Delete('remove')
+  remove(@Query(ArticlePipe) query: RemoveArticleDto) {
+    return this.articleService.remove(query);
   }
 }

@@ -1,37 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { artcleEntity } from './artcle.entity';
+import { ArtcleEntity } from './artcle.entity';
 import { Repository } from 'typeorm';
-import { CreateArticleDto, FindArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
 
 @Injectable()
 export class ArticleService {
   constructor(
-    @InjectRepository(artcleEntity)
-    private artcleEntityRepository: Repository<artcleEntity>,
+    @InjectRepository(ArtcleEntity)
+    private ArtcleEntityRepository: Repository<ArtcleEntity>,
   ) {}
 
-  async find({ pageNum, pageSize, title, description, content }: FindArticleDto) {
-    const count = await this.artcleEntityRepository.findAndCount();
-    const pagingData = { pageNum: +pageNum || 1, pageSize: +pageSize || 10, total: count[1] };
-    const data = await this.artcleEntityRepository.find({
+  async findAll({ pageNum, pageSize }: FindAllArticleDto) {
+    const count = await this.ArtcleEntityRepository.findAndCount();
+    const pagingData = { pageNum, pageSize, total: count[1] };
+    const list = await this.ArtcleEntityRepository.find({
       take: pagingData.pageSize,
-      where: [{ title }, { description }, { content }],
     });
-    return { ...pagingData, list: data };
+    return { ...pagingData, list };
+  }
+
+  async findOne(query: FindOneArticleDto) {
+    const data = await this.ArtcleEntityRepository.findOne(query);
+    // 查看文章时更新浏览次数
+    query.id && this.update(query.id, { ...data, viewCount: ++data.viewCount });
+    return data || {};
   }
 
   async create(body: CreateArticleDto) {
-    const { classify, ...data } = await this.artcleEntityRepository.save(body);
-    return { classify: classify.split(','), ...data };
+    return await this.ArtcleEntityRepository.save(body);
   }
 
   async update(id: number, body: UpdateArticleDto) {
-    return this.artcleEntityRepository.update(id, body);
+    return this.ArtcleEntityRepository.update(id, body);
   }
 
-  async remove(id: RemoveArticleDto) {
-    const data = await this.artcleEntityRepository.findOne(id);
-    return this.artcleEntityRepository.remove(data);
+  async remove(query: RemoveArticleDto) {
+    const data = await this.ArtcleEntityRepository.findOne(query);
+    return this.ArtcleEntityRepository.remove(data);
   }
 }

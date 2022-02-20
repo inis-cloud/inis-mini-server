@@ -1,6 +1,5 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, tap, timeout } from 'rxjs';
 
 export interface Response<T> {
   data: T;
@@ -10,7 +9,8 @@ export interface Response<T> {
 export class AllInterceptor<T> implements NestInterceptor<T, Response<T>> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
     return next.handle().pipe(
-      map((data) => ({
+      timeout(3000),
+      tap((data) => ({
         code: 200,
         data,
         message: '成功',
