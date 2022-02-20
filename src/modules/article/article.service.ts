@@ -15,7 +15,8 @@ export class ArticleService {
     const count = await this.ArtcleEntityRepository.findAndCount();
     const pagingData = { pageNum, pageSize, total: count[1] };
     const list = await this.ArtcleEntityRepository.find({
-      take: pagingData.pageSize,
+      skip: (pageNum - 1) * pageSize,
+      take: pageSize,
     });
     return { ...pagingData, list };
   }
