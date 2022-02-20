@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Delete, Put, Query } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger';
 import { ArticlePipe } from './article.pipe';
 import { ArticleService } from './article.service';
-import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from './dto';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from '../../common/dto';
 
 @Controller('article')
 @ApiTags('文章接口')

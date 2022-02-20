@@ -1,4 +1,4 @@
-import { Controller, Get, SetMetadata } from '@nestjs/common';
+import { Body, Controller, Post, SetMetadata } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 
@@ -7,9 +7,14 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Post('login')
   @SetMetadata('isPublic', true)
   login(): string {
     return this.appService.getHello();
+  }
+
+  @Post('register')
+  register(@Body() body) {
+    console.log(body);
   }
 }

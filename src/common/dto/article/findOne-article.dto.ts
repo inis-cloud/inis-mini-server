@@ -1,8 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsPositive } from 'class-validator';
 
 export class FindOneArticleDto {
-  @ApiProperty({ description: '文章ID', example: 1, required: true })
   @IsNumber()
   @IsPositive()
   readonly id: number;
