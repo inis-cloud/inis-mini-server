@@ -25,7 +25,7 @@ export class ArticleController {
   }
 
   @Put('update')
-  update(@Query('id', ArticlePipe) id: number, @Body() body: UpdateArticleDto) {
+  update(@Query('id') id: number, @Body() body: UpdateArticleDto) {
     return this.articleService.update(id, body);
   }
 
