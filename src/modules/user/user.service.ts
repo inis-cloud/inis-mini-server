@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../../common/entityes/user.entity';
+import { UserEntity } from '../../entityes/user.entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto, UpdateUserDto } from '../../common/dto';
+import { UpdateUserDto } from '../../common/dto';
 
 @Injectable()
 export class UserService {
@@ -13,10 +13,6 @@ export class UserService {
 
   async findAll() {
     return await this.userEntityRepository.find();
-  }
-
-  async create(body: CreateUserDto) {
-    return await this.userEntityRepository.save(body);
   }
 
   async update(id: number, body: UpdateUserDto) {
