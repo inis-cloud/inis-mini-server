@@ -12,8 +12,4 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: jwtConstants.secret,
     });
   }
-
-  async validate(payload: any) {
-    return { userId: payload.id, username: payload.username };
-  }
 }

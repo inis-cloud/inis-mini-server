@@ -27,16 +27,7 @@ export class AppService {
     const payload = { username: user.username, sub: user.id };
     // 更新登录时间
     this.userEntityRepository.update(user.id, { loginTime: new Date().toISOString() });
-    // 重新获取用户
-    const updatedUser = await this.userEntityRepository.findOne({ username });
-    if (user && user.username) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...result } = updatedUser;
-      return {
-        ...result,
-        access_token: this.jwtService.sign(payload),
-      };
-    }
+    return { access_token: this.jwtService.sign(payload) };
   }
 
   async register(body: CreateUserDto) {
