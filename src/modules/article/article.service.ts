@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArtcleEntity } from '../../entityes/artcle.entity';
 import { Repository, UpdateResult } from 'typeorm';
-import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from '../../common/dto/index';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from '../../dto/index';
 
 @Injectable()
 export class ArticleService {

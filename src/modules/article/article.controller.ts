@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Delete, Put, Query, UseGuards } from '@nes
 import { ApiTags } from '@nestjs/swagger';
 import { ArticlePipe } from './article.pipe';
 import { ArticleService } from './article.service';
-import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from '../../common/dto';
+import { CreateArticleDto, FindAllArticleDto, FindOneArticleDto, RemoveArticleDto, UpdateArticleDto } from '../../dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('article')

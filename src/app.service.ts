@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, Optional } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto, LoginUserDto } from './common/dto';
+import { CreateUserDto, LoginUserDto } from './dto';
 import { UserEntity } from './entityes/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';

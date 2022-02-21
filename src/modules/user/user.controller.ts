@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Delete, Put, Query } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger';
 import { UserPipe } from './User.pipe';
 import { UserService } from './User.service';
-import { UpdateUserDto } from '../../common/dto';
+import { UpdateUserDto } from '../../dto';
 
 @Controller('User')
 @ApiTags('文章接口')
