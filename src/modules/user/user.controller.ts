@@ -1,10 +1,11 @@
-import { Controller, Get, Body, Delete, Put, Query } from '@nestjs/common';
+import { Controller, Get, Body, Delete, Put, Query, Post, UsePipes } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UserService } from './User.service';
-import { UpdateUserDto } from '../../dto';
+import { UserService } from './user.service';
+import { LoginUserDto, RegisterUserDto, UpdateUserDto } from '../../dto';
+import { PassWordPipe } from './user.pipe';
 
 @Controller('user')
-@ApiTags('文章接口')
+@ApiTags('用户接口')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -13,13 +14,25 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Post('login')
+  login(@Body() body: LoginUserDto) {
+    return this.userService.login(body);
+  }
+
+  @Post('register')
+  @UsePipes(PassWordPipe)
+  register(@Body() body: RegisterUserDto) {
+    return this.userService.register(body);
+  }
+
   @Put('update')
+  @UsePipes(PassWordPipe)
   update(@Query('id') id: number, @Body() body: UpdateUserDto) {
     return this.userService.update(id, body);
   }
 
   @Delete('remove')
   remove(@Query() id: number) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

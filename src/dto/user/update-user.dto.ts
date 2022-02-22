@@ -1,9 +1,18 @@
-import { PartialType } from '@nestjs/swagger';
-import { IsNumber, IsPositive } from 'class-validator';
-import { CreateArticleDto } from '..';
+import { IsString } from 'class-validator';
 
-export class UpdateUserDto extends PartialType(CreateArticleDto) {
-  @IsNumber()
-  @IsPositive()
-  readonly viewCount: number;
+export class UpdateUserDto {
+  @IsString()
+  readonly role?: string;
+
+  @IsString()
+  readonly description?: string;
+
+  @IsString()
+  readonly avatar?: string;
+
+  @IsString()
+  readonly username?: string;
+
+  @IsString()
+  readonly password?: string;
 }

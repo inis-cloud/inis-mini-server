@@ -3,19 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './modules/article/article.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './entityes/user.entity';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { jwtConstants } from './constants/jwt-constants';
+import { UserModule } from './modules/user/user.module';
+import { MenuModule } from './modules/menu/menu.module';
 
 @Module({
   imports: [
-    ArticleModule,
-    TypeOrmModule.forFeature([UserEntity]),
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '7 days' },
-    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -26,8 +18,11 @@ import { jwtConstants } from './constants/jwt-constants';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    ArticleModule,
+    UserModule,
+    MenuModule,
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy],
+  providers: [AppService],
 })
 export class AppModule {}
