@@ -1,12 +1,13 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { UserRole } from 'src/enum/indxe';
 
 @Entity({ name: 'inis_mini_user' })
 export class UserEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id', comment: '用户ID' })
   id: number;
 
-  @Column('enum', { name: 'role', nullable: true, enum: ['admin', 'user'], default: 'admin' })
-  role: string;
+  @Column('enum', { name: 'role', nullable: true, enum: UserRole, default: UserRole.ADMIN })
+  role: UserRole;
 
   @Column('varchar', { name: 'description', comment: '描述', default: '这个人很懒什么也没写...' })
   description: string;

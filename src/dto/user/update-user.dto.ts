@@ -1,8 +1,9 @@
-import { IsString } from 'class-validator';
+import { IsEnum, IsString } from 'class-validator';
+import { UserRole } from 'src/enum/indxe';
 
 export class UpdateUserDto {
-  @IsString()
-  readonly role?: string;
+  @IsEnum(UserRole)
+  readonly role?: UserRole;
 
   @IsString()
   readonly description?: string;

@@ -1,3 +1,6 @@
+// 菜单实体
+export * from './menu.entity';
+
 // 用户实体
 export * from './user.entity';
 

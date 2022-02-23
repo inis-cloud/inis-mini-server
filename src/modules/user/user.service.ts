@@ -21,7 +21,7 @@ export class UserService {
   async login({ username, password }: LoginUserDto) {
     // 获取用户
     const user = await this.userEntity.findOne({ username });
-    const isMatch = bcrypt.compareSync(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new NotFoundException('wrong account or password');
     const payload = { username: user.username, sub: user.id };
     // 更新登录时间
