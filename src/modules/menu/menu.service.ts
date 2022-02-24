@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityManager, TreeRepository } from 'typeorm';
+import { TreeRepository } from 'typeorm';
 import { MenuEntity } from '../../entityes';
 
 @Injectable()
 export class MenuService {
   constructor(
     @InjectRepository(MenuEntity)
-    private readonly menuEntity: TreeRepository<MenuEntity | EntityManager>,
+    private readonly menuEntity: TreeRepository<MenuEntity>,
   ) {}
 
   async findAll() {
@@ -18,12 +18,35 @@ export class MenuService {
     return await this.menuEntity.findDescendantsTree(body);
   }
 
-  async upsert(body: MenuEntity) {
-    // this.menuEntity.manager.transaction(async (manager: EntityManager) => {
-    //   await manager.find({ children: body.children });
-    //   await manager.find({ children: body.children });
+  async upsert(body) {
+    const recursion = (menuList: any) => {
+      menuList.forEach(async (item: MenuEntity) => {
+        const parent = await this.menuEntity.save(item);
+        item.children.forEach(async (ele) => {
+          let ment = new MenuEntity();
+          ment = ele;
+          await this.menuEntity.save({ ...ment, parent });
+        });
+        item.children.length && recursion(item.children);
+      });
+      return menuList;
+    };
+
+    return recursion(body);
+
+    // const data = await this.menuEntity.save({
+    //   label: '菜单管理',
+    //   value: 'sajdijasidjijasd',
+    //   path: '/menu',
     // });
-    return this.menuEntity.upsert(body, ['value']);
+    // // await this.menuEntity.save({
+    // //   label: '角色管理',
+    // //   value: 'asdasdasdasd',
+    // //   path: '/role',
+    // //   parent: data,
+    // // });
+    // return data;
+    // return this.menuEntity.upsert(data, ['id']);
   }
 
   async remove(body: MenuEntity) {

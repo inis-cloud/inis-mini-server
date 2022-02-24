@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { MenuService } from './menu.service';
 
 @Controller('menu')
-@ApiTags('用户接口')
+@ApiTags('菜单接口')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
 

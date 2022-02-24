@@ -2,11 +2,7 @@ import { UserRole } from 'src/enum/indxe';
 import { Column, Entity, PrimaryGeneratedColumn, Tree, TreeChildren, TreeParent } from 'typeorm';
 
 @Entity({ name: 'inis_mini_menu' })
-@Tree('closure-table', {
-  closureTableName: 'category_closure',
-  ancestorColumnName: (column) => 'ancestor_' + column.propertyName,
-  descendantColumnName: (column) => 'descendant_' + column.propertyName,
-})
+@Tree('closure-table')
 export class MenuEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id', comment: '菜单ID' })
   id: number;
@@ -14,13 +10,13 @@ export class MenuEntity {
   @Column('varchar', { name: 'label', comment: '菜单名称' })
   label: string;
 
-  @Column('varchar', { name: 'value', comment: '菜单值', unique: true })
+  @Column('varchar', { name: 'value', comment: '菜单值' })
   value: string;
 
   @Column('enum', { name: 'role', nullable: true, enum: UserRole, default: UserRole.ADMIN })
   role: UserRole;
 
-  @Column('text', { name: 'icon', comment: '图标', nullable: true })
+  @Column('varchar', { name: 'icon', comment: '图标', nullable: true })
   icon: string;
 
   @Column('varchar', { name: 'path', comment: '路由', nullable: true })
