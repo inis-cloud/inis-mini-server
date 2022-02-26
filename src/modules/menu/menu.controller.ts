@@ -17,9 +17,9 @@ export class MenuController {
     return this.menuService.findOne(body);
   }
 
-  @Post('upsert')
-  upsert(@Body() body) {
-    return this.menuService.upsert(body);
+  @Post('create')
+  create(@Body() body) {
+    return this.menuService.create(body);
   }
 
   @Delete('remove')

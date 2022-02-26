@@ -10,7 +10,7 @@ export class MenuEntity {
   @Column('varchar', { name: 'label', comment: '菜单名称' })
   label: string;
 
-  @Column('varchar', { name: 'value', comment: '菜单值' })
+  @Column('varchar', { name: 'value', comment: '菜单值', unique: true })
   value: string;
 
   @Column('enum', { name: 'role', nullable: true, enum: UserRole, default: UserRole.ADMIN })

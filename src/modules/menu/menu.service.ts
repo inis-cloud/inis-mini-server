@@ -18,35 +18,19 @@ export class MenuService {
     return await this.menuEntity.findDescendantsTree(body);
   }
 
-  async upsert(body) {
-    const recursion = (menuList: any) => {
+  async create(body) {
+    const recursion = (menuList) => {
       menuList.forEach(async (item: MenuEntity) => {
         const parent = await this.menuEntity.save(item);
-        item.children.forEach(async (ele) => {
-          let ment = new MenuEntity();
-          ment = ele;
-          await this.menuEntity.save({ ...ment, parent });
+        item.children.forEach(async (ele: MenuEntity) => {
+          ele.parent = parent;
+          await this.menuEntity.save(ele);
+          ele.children.length && recursion(item.children);
         });
-        item.children.length && recursion(item.children);
       });
       return menuList;
     };
-
     return recursion(body);
-
-    // const data = await this.menuEntity.save({
-    //   label: '菜单管理',
-    //   value: 'sajdijasidjijasd',
-    //   path: '/menu',
-    // });
-    // // await this.menuEntity.save({
-    // //   label: '角色管理',
-    // //   value: 'asdasdasdasd',
-    // //   path: '/role',
-    // //   parent: data,
-    // // });
-    // return data;
-    // return this.menuEntity.upsert(data, ['id']);
   }
 
   async remove(body: MenuEntity) {
