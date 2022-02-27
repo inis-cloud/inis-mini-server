@@ -1,5 +1,6 @@
 import { Controller, Get, Body, Delete, Put, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateMenuDto } from 'src/dto';
 import { MenuService } from './menu.service';
 
 @Controller('menu')
@@ -18,7 +19,7 @@ export class MenuController {
   }
 
   @Post('create')
-  create(@Body() body) {
+  create(@Body() body: CreateMenuDto) {
     return this.menuService.create(body);
   }
 

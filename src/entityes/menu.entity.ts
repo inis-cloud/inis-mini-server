@@ -10,7 +10,7 @@ export class MenuEntity {
   @Column('varchar', { name: 'label', comment: '菜单名称' })
   label: string;
 
-  @Column('varchar', { name: 'value', comment: '菜单值', unique: true })
+  @Column('varchar', { name: 'value', comment: '菜单值' })
   value: string;
 
   @Column('enum', { name: 'role', nullable: true, enum: UserRole, default: UserRole.ADMIN })
@@ -25,7 +25,7 @@ export class MenuEntity {
   @Column('boolean', { name: 'disabled', comment: '是否禁用', default: false })
   disabled: string;
 
-  @TreeChildren()
+  @TreeChildren({ cascade: true })
   children: MenuEntity[];
 
   @TreeParent()

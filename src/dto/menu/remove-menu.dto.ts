@@ -1,8 +1,8 @@
 import { PartialType } from '@nestjs/swagger';
 import { IsNumber } from 'class-validator';
-import { UpsertMenuDto } from '..';
+import { CreateMenuDto } from '..';
 
-export class RemoveMenuDto extends PartialType(UpsertMenuDto) {
+export class RemoveMenuDto extends PartialType(CreateMenuDto) {
   @IsNumber()
   readonly id: number;
 }

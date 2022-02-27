@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TreeRepository } from 'typeorm';
+import { CreateMenuDto } from 'src/dto';
+import { TreeChildren, TreeRepository } from 'typeorm';
 import { MenuEntity } from '../../entityes';
 
 @Injectable()
@@ -19,18 +20,7 @@ export class MenuService {
   }
 
   async create(body) {
-    const recursion = (menuList) => {
-      menuList.forEach(async (item: MenuEntity) => {
-        const parent = await this.menuEntity.save(item);
-        item.children.forEach(async (ele: MenuEntity) => {
-          ele.parent = parent;
-          await this.menuEntity.save(ele);
-          ele.children.length && recursion(item.children);
-        });
-      });
-      return menuList;
-    };
-    return recursion(body);
+    return await this.menuEntity.save(body);
   }
 
   async remove(body: MenuEntity) {
