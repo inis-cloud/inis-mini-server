@@ -1,6 +1,7 @@
-import { Controller, Get, Body, Delete, Put, Post } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateMenuDto } from 'src/dto';
+import { CreateMenuDto, FindOneMenuDto } from 'src/dto';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { MenuService } from './menu.service';
 
 @Controller('menu')
@@ -14,17 +15,13 @@ export class MenuController {
   }
 
   @Get('findOne')
-  findOne(body) {
-    return this.menuService.findOne(body);
+  findOne(@Query('id') id: number) {
+    return this.menuService.findOne(id);
   }
 
-  @Post('create')
-  create(@Body() body: CreateMenuDto) {
-    return this.menuService.create(body);
-  }
-
-  @Delete('remove')
-  remove(@Body() body) {
-    return this.menuService.remove(body);
+  @UseGuards(JwtAuthGuard)
+  @Patch('upsert')
+  upsert(@Body() body: CreateMenuDto) {
+    return this.menuService.upsert(body);
   }
 }

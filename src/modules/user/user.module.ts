@@ -10,9 +10,11 @@ import { jwtConstants } from '../../constants/jwt-constants';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '7 days' },
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: jwtConstants.secret,
+        signOptions: { expiresIn: '7 days' },
+      }),
     }),
   ],
   controllers: [UserController],

@@ -10,10 +10,10 @@ export class MenuEntity {
   @Column('varchar', { name: 'label', comment: '菜单名称' })
   label: string;
 
-  @Column('varchar', { name: 'value', comment: '菜单值' })
+  @Column('varchar', { name: 'value', comment: '菜单值', unique: true })
   value: string;
 
-  @Column('enum', { name: 'role', nullable: true, enum: UserRole, default: UserRole.ADMIN })
+  @Column('enum', { name: 'role', enum: UserRole, default: UserRole.ADMIN })
   role: UserRole;
 
   @Column('varchar', { name: 'icon', comment: '图标', nullable: true })
@@ -23,11 +23,11 @@ export class MenuEntity {
   path: string;
 
   @Column('boolean', { name: 'disabled', comment: '是否禁用', default: false })
-  disabled: string;
+  disabled: boolean;
 
   @TreeChildren({ cascade: true })
   children: MenuEntity[];
 
-  @TreeParent()
+  @TreeParent({ onDelete: 'CASCADE' })
   parent: MenuEntity;
 }

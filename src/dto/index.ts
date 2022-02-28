@@ -1,7 +1,6 @@
 // 菜单对象
-export * from './menu/create-menu.dto';
+export * from './menu/upsert-menu.dto';
 export * from './menu/findOne-menu.dto';
-export * from './menu/remove-menu.dto';
 
 // 文章对象
 export * from './article/create-article.dto';
