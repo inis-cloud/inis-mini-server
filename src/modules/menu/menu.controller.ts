@@ -1,6 +1,6 @@
 import { Controller, Get, Body, Patch, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateMenuDto, FindOneMenuDto } from 'src/dto';
+import { CreateMenuDto } from 'src/dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { MenuService } from './menu.service';
 

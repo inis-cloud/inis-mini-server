@@ -6,22 +6,7 @@ import { MenuModule } from './modules/menu/menu.module';
 import { ConnectModule } from './modules/connect/connect.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      database: 'root',
-      username: 'root',
-      password: 'root',
-      synchronize: true,
-      autoLoadEntities: true,
-    }),
-    ArticleModule,
-    UserModule,
-    MenuModule,
-    ConnectModule,
-  ],
+  imports: [TypeOrmModule.forRoot(), ArticleModule, UserModule, MenuModule, ConnectModule],
   controllers: [],
   providers: [],
 })
