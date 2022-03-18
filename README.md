@@ -1,10 +1,3 @@
-<p align="center">
-  <a href="https://inis.cc" target="blank"><img src="https://avatars.githubusercontent.com/u/76507449?s=200&v=4" width="120" alt="Inis Logo" /></a>
-</p>
-
-[circleci-image]: https://avatars.githubusercontent.com/u/76507449?s=200&v=4
-[circleci-url]: https://inis.cc
-
   <p align="center">一个异步非阻塞 IO <a href="http://nodejs.org" target="_blank">Node.js</a>版 Blog REST_API</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -46,7 +39,9 @@ $ npm run start:prod
 ## API 文档
 
 ```bash
-http://127.0.0.1:3000/inis_mini_api
+http://127.0.0.1:3000/blog-server
+
+http://127.0.0.1:3000/blog-server-json
 ```
 
 ## License

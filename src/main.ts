@@ -9,7 +9,7 @@ import { ServiceInterceptor } from './interceptors/service.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const options = new DocumentBuilder().setTitle('INIS-Mini').setDescription('基于Node的REST_API服务').setVersion('1.0').build();
+  const options = new DocumentBuilder().setTitle('blog-server').setDescription('基于Node的REST_API服务').setVersion('1.0').build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('inis_mini_api', app, document);
 
